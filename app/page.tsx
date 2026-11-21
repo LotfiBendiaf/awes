@@ -1,69 +1,15 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { ButtonLink } from "@/components/ui/button-link";
+import { Hero } from "@/components/sections/hero";
+import { SectionHeading } from "@/components/sections/section-heading";
+import { Cta } from "@/components/sections/cta";
+import { PoleCard } from "@/components/services/pole-card";
+import { poles, processSteps } from "@/data/site";
+import { createMetadata } from "@/lib/metadata";
 
+export const metadata: Metadata = createMetadata("Accueil", "AWES accompagne les porteurs de projets, entreprises, startups et investisseurs avec des solutions concrètes.", "/");
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  return <main><Hero kicker="Accompagnement · Conseil · Commerce extérieur" title={<>Un partenaire d’exception pour <em>donner vie</em> à vos projets.</>} description="AWES accompagne les porteurs de projets, entreprises, startups et investisseurs avec une approche rigoureuse, humaine et orientée vers des résultats concrets." actions={<><ButtonLink href="/simulateur">Faire le test</ButtonLink><ButtonLink href="#poles" variant="outline">Découvrir nos pôles</ButtonLink><ButtonLink href="/contact" variant="light">Prendre rendez-vous</ButtonLink></>} metrics={[{ value: "04", label: "Pôles d’expertise" }, { value: "10", label: "Axes d’accompagnement" }, { value: "01", label: "Interlocuteur dédié" }, { value: "100%", label: "Approche personnalisée" }]} />
+    <section className="cream" id="poles"><div className="container"><SectionHeading eyebrow="Nos pôles d’expertise" title="Un accompagnement complet, à chaque étape de votre projet." lead="AWES réunit quatre pôles d’expertise pour comprendre, valider, réaliser, gérer, financer, former et développer vos projets." /><div className="pole-grid">{poles.map((pole) => <PoleCard pole={pole} key={pole.id} />)}</div></div></section>
+    <section><div className="container"><SectionHeading eyebrow="Notre méthode" title="Une approche claire, humaine et orientée résultats." /><div className="process-grid">{processSteps.map((step, index) => <article className="process-step" key={step.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{step.title}</h3><p>{step.text}</p></article>)}</div></div></section><Cta /></main>;
 }

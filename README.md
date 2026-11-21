@@ -1,4 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Site AWES
+
+Site institutionnel AWES réalisé avec Next.js App Router, TypeScript et Tailwind CSS.
+
+## Développement
+
+Copier `.env.example` vers `.env.local`, renseigner uniquement les valeurs vérifiées, puis lancer :
+
+```bash
+npm install
+npm run dev
+```
+
+Le site est disponible sur `http://localhost:3000`.
+
+## Vérification
+
+```bash
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
+
+## Déploiement
+
+Déployer sur toute plateforme compatible Next.js (`npm run build`, puis `npm start`). Configurer `NEXT_PUBLIC_SITE_URL` avec l’URL publique et les coordonnées AWES. Pour livrer les formulaires, définir un endpoint HTTPS dans `CONTACT_WEBHOOK_URL` et, si nécessaire, son jeton serveur dans `CONTACT_WEBHOOK_TOKEN`.
+
+Sans webhook, le formulaire valide les données mais indique clairement qu’aucune demande n’a été transmise.
 
 ## Getting Started
 
